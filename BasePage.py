@@ -6,7 +6,8 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.base_url = "http://magento2demo.firebearstudio.com/gear/bags.html"
+        # self.base_url = "http://"
+        # self.base_url = "http://magento2demo.firebearstudio.com/gear/bags.html"
 
     def find_element(self, locator, time=10):
         return WebDriverWait(self.driver, time).until(ec.presence_of_element_located(locator),
@@ -16,5 +17,5 @@ class BasePage:
         return WebDriverWait(self.driver, time).until(ec.presence_of_all_elements_located(locator),
                                                       message=f"Can't find elements by locator {locator}")
 
-    def go_to_site(self):
+    def open_page(self):
         return self.driver.get(self.base_url)
