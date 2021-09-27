@@ -12,11 +12,10 @@ class MagentoSearchLocators:
     LOCATOR_MAGENTO_SEARCH_PRICE = (By.ID, "text")
     LOCATOR_MAGENTO_SEARCH_BUTTON = (By.ID, "text")
     # LOCATOR_MAGENTO_SEARCH_GOODS_LIST = (By.CLASS_NAME, "price-box price-final_price")
-    LOCATOR_MAGENTO_SEARCH_BUTTONS = (By.CLASS_NAME, "search2__button")
     # LOCATOR_MAGENTO_SEARCH_GOODS_LIST = (By.CLASS_NAME, "product-item-info")
-    LOCATOR_MAGENTO_SEARCH_GOODS_LIST = (By.CSS_SELECTOR, ".item.product.product-item")
-    # LOCATOR_MAGENTO = (By.CSS_SELECTOR, ".service__name")
-    # data-price-amount
+    # LOCATOR_MAGENTO_SEARCH_GOODS_LIST = (By.CSS_SELECTOR, ".item.product.product-item")
+    LOCATOR_MAGENTO_SEARCH_GOODS_LIST = (By.CSS_SELECTOR, ".item.product.product-item > div")
+    LOCATOR_MAGENTO_SEARCH_GOOD_PRICE = (By.CSS_SELECTOR, ".item.product.product-item > div > div >span > span .price")
 
 # find_elements_by_name
 # find_elements_by_xpath
@@ -43,19 +42,17 @@ class SearchHelper(BasePage):
     #     self.driver = driver
     # base_url = "http://magento2demo.firebearstudio.com/gear/bags.html"
 
+    # def get_product_price(self):
+    #     return self.find_element(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_PRICE,
+    #                              time=MagentoTimeouts.TIMEOUT_DEFAULT).text
+
     def get_product_price(self):
-        return self.find_element(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_PRICE,
+        return self.find_element(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_GOOD_PRICE,
                                  time=MagentoTimeouts.TIMEOUT_DEFAULT).text
 
     def click_on_good(self):
         return self.find_element(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_BUTTON,
                                  time=MagentoTimeouts.TIMEOUT_DEFAULT).click()
-
-    # def get_products_list(self):
-    #     all_list = self.find_elements(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_GOODS_LIST,
-    #                                   time=MagentoTimeouts.TIMEOUT_DEFAULT)
-    #     goods_list = [x.text for x in all_list if len(x.text) > 0]
-    #     return goods_list
 
     def get_products_list(self):
         all_list = self.find_elements(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_GOODS_LIST,
@@ -63,3 +60,9 @@ class SearchHelper(BasePage):
         # goods_list = [x.text for x in all_list if len(x.text) > 0]
         goods_list = all_list
         return goods_list
+
+    def get_child_list(self):
+        all_list = self.find_elements(MagentoSearchLocators.LOCATOR_MAGENTO_SEARCH_CHILDS,
+                                      time=MagentoTimeouts.TIMEOUT_DEFAULT)
+        # goods_list = [x.text for x in all_list if len(x.text) > 0]
+        return all_list

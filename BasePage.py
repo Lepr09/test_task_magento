@@ -6,6 +6,7 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
+        driver.maximize_window()
         # self.base_url = "http://"
         # self.base_url = "http://magento2demo.firebearstudio.com/gear/bags.html"
 
